@@ -24,13 +24,13 @@ self.addEventListener('notificationclick', (event) => {
   event.notification.close();
 });
 
-self.addEventListener('push', (event) => {
-  const data = event.data.json();
-  const { title, body } = data;
-  event.waitUntil(
-    self.registration.showNotification(title, {
-      body,
-      icon: '/icon.png', // Set an icon if available
-    })
-  );
-});
+// self.addEventListener('push', (event) => {
+//   const data = event.data.json();
+//   const { title, body } = data;
+//   event.waitUntil(
+//     self.registration.showNotification(title, {
+//       body,
+//       icon: '/icon.png', // Set an icon if available
+//     })
+//   );
+// });
