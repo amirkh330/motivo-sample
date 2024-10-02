@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 
 const Alarm = () => {
   const [time, setTime] = useState<string>('');
+  const [title, setTitle] = useState<string>('');  
   const [isAlarmSet, setIsAlarmSet] = useState<boolean>(false);
 
   useEffect(() => {
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
+      navigator.serviceWorker.register('/service-worker.js').then((registration) => {
         console.log('Service Worker registered with scope:', registration.scope);
       });
     }
@@ -31,9 +32,12 @@ const Alarm = () => {
       setIsAlarmSet(true);
 
       setTimeout(() => {
-        if (Notification.permission === 'granted') {
-          new Notification('Alarm', {
-            body: 'It\'s time!',
+        if (Notification.permission === 'granted' && 'serviceWorker' in navigator) {
+          navigator.serviceWorker.ready.then((registration) => {
+            registration.showNotification(title || 'Alarm', {
+              body: 'It\'s time!',
+              tag: 'alarm-notification', // A unique tag for the notification
+            });
           });
         }
         setIsAlarmSet(false); // Reset the alarm state after it goes off
@@ -46,6 +50,18 @@ const Alarm = () => {
   return (
     <div style={{ padding: '20px' }}>
       <h1>PWA Alarm Example</h1>
+
+      <div style={{ marginBottom: '20px' }}>
+        <label htmlFor="alarmTitle">Set Alarm Title:</label>
+        <input
+          id="alarmTitle"
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Enter alarm title"
+          style={{ marginLeft: '10px', marginBottom: '10px' }}
+        />
+      </div>
 
       <div style={{ marginBottom: '20px' }}>
         <label htmlFor="alarmTime">Set Alarm Time:</label>
