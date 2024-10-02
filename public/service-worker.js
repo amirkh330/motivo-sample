@@ -1,18 +1,21 @@
 // public/service-worker.js
-self.addEventListener('install', (event) => {
-  console.log('Service Worker installed');
+
+console.log("service");
+
+self.addEventListener("install", (event) => {
+  console.log("Service Worker installed");
   event.waitUntil(
-    caches.open('pwa-cache').then((cache) => {
+    caches.open("pwa-cache").then((cache) => {
       return cache.addAll([
-        '/', // Add other static resources if needed
-        '/index.html',
-        '/favicon.ico',
+        "/", // Add other static resources if needed
+        "/index.html",
+        "/favicon.ico",
       ]);
     })
   );
 });
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
       return response || fetch(event.request);
@@ -20,7 +23,7 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
-self.addEventListener('notificationclick', (event) => {
+self.addEventListener("notificationclick", (event) => {
   event.notification.close();
 });
 
