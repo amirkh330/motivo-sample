@@ -1,8 +1,5 @@
 import "./globals.css";
 
-
-
-
 export const metadata = {
   title: "PWA with Next 14",
   description: "PWA application with Next 14",
@@ -30,13 +27,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  
   return (
     <html lang="en">
+      <script src="/service-worker.js" defer></script>
       <link rel="manifest" href="/manifest.json" />
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
