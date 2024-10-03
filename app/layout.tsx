@@ -1,4 +1,6 @@
+import Head from "next/head";
 import "./globals.css";
+import Script from "next/script";
 
 export const metadata = {
   title: "PWA with Next 14",
@@ -28,10 +30,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // <html lang="en">
+    //   <script src="/service-worker.js" defer></script>
+    //   <link rel="manifest" href="/manifest.json" />
+    //   <body>{children}</body>
+    // </html>
     <html lang="en">
-      <script src="/service-worker.js" defer></script>
+    <Head>
       <link rel="manifest" href="/manifest.json" />
-      <body>{children}</body>
-    </html>
+      <meta name="theme-color" content="#000000" />
+      {/* Other head elements can go here */}
+    </Head>
+    <body>
+      {children}
+
+      {/* This will defer the loading of the service worker */}
+      <Script src="/sw.js" strategy="afterInteractive" />
+    </body>
+  </html>
   );
 }
