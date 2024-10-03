@@ -20,16 +20,13 @@ export default function RootLayout({
     //   <body>{children}</body>
     // </html>
     <html lang="en">
-    <Head>
-      <link rel="manifest" href="/manifest.json" />
-      <meta name="theme-color" content="#000000" />
-      {/* Other head elements can go here */}
-    </Head>
-    <body>
-      {children}
-      <script src="/service-worker.js" defer></script>
-      <script src="/sw.js" defer></script>
-    </body>
-  </html>
+      <Head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#000000" />
+        {/* Other head elements can go here */}
+        <script src="/service-worker.js" defer></script>
+      </Head>
+      <body>{children}</body>
+    </html>
   );
 }
