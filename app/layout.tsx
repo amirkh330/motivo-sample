@@ -1,6 +1,5 @@
 import Head from "next/head";
 import "./globals.css";
-import Script from "next/script";
 
 export const metadata = {
   title: "PWA with Next 14",
@@ -28,9 +27,8 @@ export default function RootLayout({
     </Head>
     <body>
       {children}
-
-      {/* This will defer the loading of the service worker */}
-      <Script src="/sw.js" strategy="afterInteractive" />
+      <script src="/service-worker.js" defer></script>
+      <script src="/sw.js" defer></script>
     </body>
   </html>
   );
