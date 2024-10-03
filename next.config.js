@@ -1,12 +1,16 @@
-// next.config.js
-const withPWA = require("next-pwa")({
+import withPWAInit from "@ducanh2912/next-pwa";
+
+const withPWA = withPWAInit({
   dest: "public",
-  register: true, // Ensures service worker is registered
-  skipWaiting: true,
+  cacheOnFrontEndNav: true,
+  aggressiveFrontEndNavCaching: true,
+  reloadOnOnline: true,
   disable: false,
-  
+  workboxOptions: {
+    disableDevLogs: true,
+  },
 });
 
-module.exports = withPWA({
-
+export default withPWA({
+  // Your Next.js config
 });
