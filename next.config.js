@@ -11,6 +11,6 @@ const withPWA = withPWAInit({
   },
 });
 
-export default withPWA({
-  // Your Next.js config
+module.exports = withPWA({
+  // Your other Next.js configurations here
 });
